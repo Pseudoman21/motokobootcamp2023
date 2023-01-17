@@ -1,4 +1,5 @@
 1. How much is the current memory capacity of a canister?
+Answer: 4GB because of the limitations of 32 bit addressing.
 2. What is the issue with the following code sample?
 actor {
   let counter : Nat = 0;
