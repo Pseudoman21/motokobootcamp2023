@@ -54,4 +54,30 @@ actor {
     };
     return counter;
   };
+
+  // duplicate nat element checker in an array
+  public query func find_duplicates(a : [Nat]) : async [Nat] {
+    var buf = Buffer.Buffer<Nat>(1);    
+    for (index in Iter.range(0, a.size() -1)) { // 0 - array size // 2,1,2,3,4,6,6 - a[i=0] = 2
+      for (j in Iter.range(index + 1, a.size() - 1)) { // a[j=0] = 1
+        if (a[index] == a[j] and not Buffer.contains(buf, a[index], Nat.equal)) { 
+          // a[index=0] 2 === a[j=0] 1 ? &&  a[index] is in Buffer buf
+          buf.add(a[j]);
+        };
+      };
+    };
+    return Buffer.toArray(buf);
+  };
+
+  // nat to binary converter
+  public query func convert_to_binary(n : Nat) : async Text {
+    var binText : Text = "";
+    var quo = n;
+    while (quo > 0) {
+      var rem = quo % 2;
+      binText := Nat.toText(rem) # binText;
+      quo := quo / 2;
+    };
+    return binText;
+  };
 };
